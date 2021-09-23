@@ -12,6 +12,7 @@ namespace TenderWin.Models
     //Класс для соединения с сервером
     public class ConnectToTenderWin
     {
+        //Получить необходимые данные с сервера
         public static Tender GetDataFromServer(string id)
         {
             Tender tender = GetTender(id);
@@ -31,12 +32,14 @@ namespace TenderWin.Models
         {
             var responseString2 = Request("https://market.mosreg.ru/Trade/ViewTrade/" + id, "GET");
             HtmlParser htmlParser = new HtmlParser(responseString2);
-            place = htmlParser.getPlace();
-            List<string> names = htmlParser.getParamLotList("Наименование товара, работ, услуг:");
-            List<string> units = htmlParser.getParamLotList("Единицы измерения:");
-            List<string> numbers = htmlParser.getParamLotList("Количество:");
-            List<string> prices = htmlParser.getParamLotList("Стоимость единицы продукции ( в т.ч. НДС при наличии):");
-
+            //Получение места поставки
+            place = htmlParser.GetPlace();
+            //Получение данных о лотах
+            List<string> names = htmlParser.GetParamLotList("Наименование товара, работ, услуг:");
+            List<string> units = htmlParser.GetParamLotList("Единицы измерения:");
+            List<string> numbers = htmlParser.GetParamLotList("Количество:");
+            List<string> prices = htmlParser.GetParamLotList("Стоимость единицы продукции ( в т.ч. НДС при наличии):");
+            //Преобразование данных о лотах в список лотов
             List<Lot> lots = new List<Lot>();
             for (int i = 0; i < names.Count; i++)
             {
@@ -60,7 +63,12 @@ namespace TenderWin.Models
                 {"Id", id}
             };
             var responseString = Request("https://api.market.mosreg.ru/api/Trade/GetTradesForParticipantOrAnonymous", "POST", parameters);
-            return JsonConvert.DeserializeObject<Response>(responseString).Tenders[0];
+            Response response = JsonConvert.DeserializeObject<Response>(responseString);
+            if(response.totalrecords < 1)
+            {
+                throw new ApplicationException("Тендер с данным номером не найден");
+            }
+            return response.Tenders[0];
         }
         //Запрос на сервер с необязательным аргументом параметры
         private static string Request(string Url, string method, Dictionary<string,string> parms = null)

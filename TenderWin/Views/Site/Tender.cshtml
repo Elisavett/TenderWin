@@ -1,0 +1,84 @@
+﻿@model TenderWin.Models.Tender
+
+@{
+    ViewBag.Title = "Tender";
+}
+
+<h2>Тендер № @Model.Id</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TradeStateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TradeStateName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerFullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerFullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TradeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TradeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InitialPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InitialPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FillingApplicationEndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FillingApplicationEndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PublicationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PublicationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Place)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Place)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lots)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lots, "Lots")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Documents)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Documents, "Documents")
+        </dd>
+    </dl>
+</div>
