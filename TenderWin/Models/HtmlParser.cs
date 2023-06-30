@@ -27,6 +27,7 @@ namespace TenderWin.Models
                 ?.QuerySelector("p").InnerText;
         }
         //Получение списка данных о лотах по обозначению категории данных
+
         public List<string> GetParamLotList(string paramName)
         {
             //Вырираем текст каждого последнего дочернего элемента по классу родительских элементов
